@@ -1,6 +1,6 @@
 {
   "name": "mangomodel-search",
-  "description": "A mixin for mangomodel",
+  "description": "A search mixin for mangomodel",
   "scripts": {
     "test": "make test"
   },
@@ -12,7 +12,11 @@
   "devDependencies": {
     "mocha": "0.12.x",
     "should": "0.5.x",
-    "mangomodel": "0.0.x"
+    "mangomodel": "0.0.x",
+    "monk": "0.3.x",
+    "mongodb": "1.1.x",
+    "async": "0.1.x",
+    "underscore": "1.4.x"
   },
   "repository": {
     "type": "git",

@@ -8,16 +8,22 @@ var limitOption = function(config, options) {
   return limit;
 };
 
+var sortLookups = {
+  "desc": -1
+};
+
 var sortOption = function(config, options) {
   var sort = (options['$sort'] || config.$sort);
-  if (typeof sort !== "undefined") {
+
+  // if we have been provided a string, then split it
+  if (typeof sort == "string" || (sort instanceof String)) {
     sort = sort.split(',');
-    if (sort[1] && sort[1] === 'desc') {
-      sort[1] = -1;
-    }
-    else {
-      sort[1] = 1;
-    }
+  }
+
+  // if we have a sort array (which we should), then ensure we have a valid
+  // integer value for the second arg
+  if (Array.isArray(sort)) {
+    sort[1] = parseInt(sort[1], 10) || sortLookups[(sort[1] || '').toLowerCase()] || 1;
   }
 
   return sort;
@@ -44,14 +50,19 @@ module.exports = function(config) {
       var limit = limitOption(config, options);
       var sort = sortOption(config, options);
       
+      var query = {'deleted': {'$ne': true}};
       var queryOptions = {stream: stream, limit: limit, sort: [sort]};
       
-      var query = this.getCollection().col.find({'deleted': {'$ne': true}}, queryOptions);
-      if (stream) {
-        return query;
+      if (options['$after']) {
+        query[sort[1] > 0 ? '$gte' : '$lte'] = options['$after'];
       }
 
-      return query.toArray(cb);
+      var cursor = this.getCollection().col.find(query, queryOptions);
+      if (stream) {
+        return cursor;
+      }
+
+      return cursor.toArray(cb);
     }
   }
 };

@@ -101,5 +101,13 @@ describe('MangoModelSearch', function() {
       done();
     });
   });
+  // it('should return only results after a data point', function(done) {
+  //   var Ants = MangoModel.create('ants');
+  //   // Mix in the search method
+  //   Ants.methods(MangoModelSearch());
 
+  //   Ants.search({$after: new Date("2012-09-25T00:17:00.000Z")}, function(err, ants) {
+  //     ants.should.have.length(13);
+  //     done();
+  // });
 });

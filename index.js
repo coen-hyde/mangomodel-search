@@ -53,8 +53,15 @@ module.exports = function(config) {
       var query = {'deleted': {'$ne': true}};
       var queryOptions = {stream: stream, limit: limit, sort: [sort]};
       
-      if (options['$after']) {
-        query[sort[1] > 0 ? '$gte' : '$lte'] = options['$after'];
+      if (options['$from']) {
+        var from = {};
+        from[sort[1] > 0 ? '$gte' : '$lte'] = options['$from'];
+        query[sort[0]] = from;
+      }
+      if (options['$until']) {
+        var until = {};
+        until[sort[1] > 0 ? '$lte' : '$gte'] = options['$until'];
+        query[sort[0]] = until;
       }
 
       var cursor = this.getCollection().col.find(query, queryOptions);

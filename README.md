@@ -64,5 +64,31 @@ Ants.search({ $sort: 'friends,desc', $until: 30 }, function(err, ants) {
 Ants.search({ $sort: 'friends,asc', $until: 30 }, function(err, ants) {
   // returns all ants with 30 friends or less. Ants with the least friends will be returned first
 });
-
 ```
+
+Property Searching
+------------------
+
+It is also possible search on any field. Any options provided that do not begin with a '$' will be considered property searches. eg
+
+```js
+// no options
+Ants.search({email: 'workerant1000@sandhill.com'}, function(err, ants) {
+  // will only return ants with the email address 'workerant1000@sandhill.com'
+});
+```
+
+Just be aware searching on any property could result in significant performance impacts if the property being searched on is not indexed.
+
+Property Searching with Regex
+-----------------------------
+
+To do more complicated searches, such as wild cards, you can use regex. To use regex, make sure you begin your regex query with a /. eg
+
+```js
+// no options
+Ants.search({email: '/(.*)@sandhill.com$/'}, function(err, ants) {
+  // will only return ants with the email address 'workerant1000@sandhill.com'
+});
+
+Regex's should be avioded where ever possible. They come with a significant performance impact.

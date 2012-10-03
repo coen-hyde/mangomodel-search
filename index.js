@@ -1,3 +1,6 @@
+var _ = require('underscore');
+
+var validOptions = ['$limit', '$sort', '$from', '$until'];
 
 var limitOption = function(config, options) {
   var limit = config.$limit;
@@ -46,6 +49,8 @@ module.exports = function(config) {
       else {
         var stream = false;
       }
+
+      options = _.pick(options, validOptions);
 
       var limit = limitOption(config, options);
       var sort = sortOption(config, options);

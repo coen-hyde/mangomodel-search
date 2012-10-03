@@ -8,15 +8,16 @@
     "node": "v0.8.x"
   },
   "version": "0.1.0",
-  "dependencies": {},
+  "dependencies": {
+    "underscore": "1.4.x"
+  },
   "devDependencies": {
     "mocha": "0.12.x",
     "should": "0.5.x",
     "mangomodel": "0.0.x",
     "monk": "0.3.x",
     "mongodb": "1.1.x",
-    "async": "0.1.x",
-    "underscore": "1.4.x"
+    "async": "0.1.x"
   },
   "repository": {
     "type": "git",

@@ -88,7 +88,7 @@ To do more complicated searches, such as wild cards, you can use regex. To use r
 ```js
 // no options
 Ants.search({email: '/(.*)@sandhill.com$/'}, function(err, ants) {
-  // will only return ants with the email address 'workerant1000@sandhill.com'
+  // will only return ants with the email address ending in '@sandhill.com'
 });
 
 Regex's should be avioded where ever possible. They come with a significant performance impact.

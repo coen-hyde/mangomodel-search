@@ -27,7 +27,7 @@ Options
 
 *  $sort - Specify the property and method to sort by. Syntax is property name followed by an optional comma and sort method. eg. "age,desc". Default is "created_at,desc"
 
-*  $from - A data point to return results only after and including from that point. The property this data point this refers to is determined by the sort option. eg. By defaut sort is sorting the created_at property in descending order. Therefore If you specify a from option it's value must be date and the query will return all results created less than and including the date provided in the from option.
+*  $from - A data point to return results only after and including from that point. The property this data point refers to is determined by the sort option. eg. By defaut sort is sorting the created_at property in descending order. Therefore If you specify a from option it's value must be date and the query will return all results created less than and including the date provided in the from option.
 
 *  $until - Similar to from but in reverse. Using the created_at example again. If a until is specified instead of from, it will return all results upto and including the value provided in the until option.
 

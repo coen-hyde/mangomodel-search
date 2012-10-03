@@ -12,8 +12,8 @@
     "underscore": "1.4.x"
   },
   "devDependencies": {
-    "mocha": "0.12.x",
-    "should": "0.5.x",
+    "mocha": "1.5.x",
+    "should": "1.2.x",
     "mangomodel": "0.0.x",
     "monk": "0.3.x",
     "mongodb": "1.1.x",

@@ -1,7 +1,5 @@
 var _ = require('underscore');
 
-var validOptions = ['$limit', '$sort', '$from', '$until'];
-
 var limitOption = function(config, options) {
   var limit = config.$limit;
   if (typeof options['$limit'] !== "undefined") {
@@ -50,12 +48,21 @@ module.exports = function(config) {
         var stream = false;
       }
 
-      options = _.pick(options, validOptions);
+      var propertySearch = _.pick(options, _.filter(_.keys(options), function(property) {
+        return (property.substr(0,1) !== '$');
+      }));
+      
+      // replace regex searches with regex queries
+      _.each(propertySearch, function(value, key) {
+        if(value.length > 0 && value[0] === '/' && value[value.length-1] === '/') {
+          propertySearch[key] = {'$regex': value.substring(1,value.length-1)};
+        }
+      });
 
       var limit = limitOption(config, options);
       var sort = sortOption(config, options);
       
-      var query = {'deleted': {'$ne': true}};
+      var query = _.extend(propertySearch, {'deleted': {'$ne': true}});
       var queryOptions = {stream: stream, limit: limit, sort: [sort]};
       
       if (options['$from']) {

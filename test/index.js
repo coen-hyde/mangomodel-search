@@ -121,4 +121,26 @@ describe('MangoModelSearch', function() {
       done();
     });
   });
+  it('should return results matching a property search', function(done) {
+    var Ants = MangoModel.create('ants');
+    // Mix in the search method
+    Ants.methods(MangoModelSearch());
+
+    Ants.search({email: 'dumbarse-10@test.kondoot.com'}, function(err, ants) {
+      ants.should.have.length(1);
+      ants[0].email.should.equal('dumbarse-10@test.kondoot.com');
+      done();
+    });
+  });
+  it('should return results matching a regex property search', function(done) {
+    var Ants = MangoModel.create('ants');
+    // Mix in the search method
+    Ants.methods(MangoModelSearch());
+
+    Ants.search({email: '/^dumbarse-0[\\d]@test.kondoot.com$/', $sort: 'email'}, function(err, ants) {
+      ants.should.have.length(10);
+      ants[0].email.should.equal('dumbarse-00@test.kondoot.com');
+      done();
+    });
+  });
 });

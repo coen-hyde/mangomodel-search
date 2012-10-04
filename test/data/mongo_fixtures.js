@@ -9,7 +9,7 @@ module.exports = {
     var numDocs = 30;
     for (var num = 0; num < numDocs; num = ++num) {
       // pad number. What's a better way to do this?
-      var inc = (new Array(numDocs.toString().length-Math.floor(num / 10)).join("0"))+num;
+      var inc = (new Array(1+numDocs.toString().length-num.toString().length).join("0"))+num;
       documents.push({
         _id: ObjectId('aa00000000000000000000' + inc),
         email: 'dumbarse-' + inc + '@test.kondoot.com',

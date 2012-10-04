@@ -143,4 +143,14 @@ describe('MangoModelSearch', function() {
       done();
     });
   });
+  it('should count results of a search', function(done) {
+    var Ants = MangoModel.create('ants');
+    // Mix in the search method
+    Ants.methods(MangoModelSearch());
+
+    Ants.search({$count: true}, function(err, result) {
+      result.should.equal(30);
+      done();
+    });
+  });
 });

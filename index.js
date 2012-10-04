@@ -76,6 +76,10 @@ module.exports = function(config) {
         query[sort[0]] = until;
       }
 
+      if (options['$count']) {
+        return this.getCollection().col.count(query, cb);
+      }
+
       var cursor = this.getCollection().col.find(query, queryOptions);
       if (stream) {
         return cursor;

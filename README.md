@@ -31,6 +31,8 @@ Options
 
 *  $until - Similar to from but in reverse. Using the created_at example again. If a until is specified instead of from, it will return all results upto and including the value provided in the until option.
 
+*  $count - Count will return the total number results this query would return. Ignores $limit and $sort options
+
 Examples
 --------
 
